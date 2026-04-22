@@ -1,10 +1,10 @@
-# EZ Studio 🚀
+# EZ Studio 
 
 Basic HTML, CSS, and JavaScript project.
 
 ---
 
-## 🚀 Getting Started (Local Setup)
+##  Getting Started (Local Setup)
 
 ### 1. Clone the Repository (in terminal - where you want the project folder to go to)
 
@@ -51,7 +51,7 @@ Then:
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 EZ_Studio/
 │── index.html
