@@ -7,10 +7,78 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>EZ Studio</h1>
-    <p>My basic HTML/CSS/JS setup is working.</p>
-    <button id="btn">Click Me</button>
+  <div class="page">
+
+    <!-- Top bar -->
+    <div class="top-bar">
+      <h1 class="logo">EZ Studio</h1>
+      <button class="info-btn">i</button>
+    </div>
+
+    <!-- Main content -->
+<div class="main-content">
+
+  <!-- CENTER -->
+  <div class="center">
+
+    <!-- Drum -->
+    <img src="drum.png" alt="Drum" class="drum" />
+
+    <!-- Main control -->
+    <div class="main-control">
+      <div class="up-arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" width="170" height="61" viewBox="0 0 170 61" fill="none">
+          <path d="M127.5 38.125L85 22.875L42.5 38.125"
+            stroke="#1E1E1E"
+            stroke-width="8"
+            stroke-linecap="round"
+            stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="play-bar"></div>
+    </div>
+
+  </div>
+
+  <!-- RIGHT SIDE CONTROLS -->
+  <div class="controls">
+
+    <div class="control">
+      <p>Pitch</p>
+      <div class="arrow up"></div>
+      <div class="arrow down"></div>
+    </div>
+
+    <div class="control">
+      <p>Volume</p>
+      <div class="arrow up"></div>
+      <div class="arrow down"></div>
+    </div>
+
+    <div class="control">
+      <p>Timbre</p>
+      <div class="arrow up"></div>
+      <div class="arrow down"></div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="advanced-panel">
+  <div class="advanced-arrow">
+    <svg xmlns="http://www.w3.org/2000/svg" width="170" height="61" viewBox="0 0 170 61" fill="none">
+      <path d="M127.5 38.125L85 22.875L42.5 38.125"
+        stroke="#1E1E1E"
+        stroke-width="8"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+    </svg>
+  </div>
+  <p>Advanced</p>
+</div>
+<div class="bottom-bar"></div>
+
   </div>
 
   <script src="script.js"></script>
