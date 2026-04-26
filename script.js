@@ -76,3 +76,97 @@ document.getElementById("sound-down").onclick = () => {
   if (soundLevel > 1) soundLevel--;
   soundValue.textContent = soundLevel;
 };
+
+const infoBtn = document.querySelector(".info-btn");
+const overlay = document.getElementById("tutorial-overlay");
+const title = document.getElementById("tutorial-title");
+const text = document.getElementById("tutorial-text");
+
+const nextBtn = document.getElementById("tutorial-next");
+const backBtn = document.getElementById("tutorial-back");
+const exitBtn = document.getElementById("tutorial-exit");
+const closeBtn = document.getElementById("tutorial-close");
+
+let step = 0;
+
+const steps = [
+  {
+    title: "Welcome to EZ Studio!",
+    text: "Let’s walk through some key functions. You can exit anytime by pressing the X."
+  },
+  {
+    title: "The Drum...",
+    text: "Press the spacebar to play a sound."
+  },
+  {
+    title: "Simple Settings",
+    text: "Use arrows to change pitch, volume, and sound."
+  },
+  {
+    title: "Advanced Settings",
+    text: "Use the Advanced tab for more features."
+  },
+  {
+    title: "You're Ready to Go!",
+    text: "Good luck!"
+  }
+];
+
+// open tutorial
+infoBtn.onclick = () => {
+  step = 0;
+  showStep();
+  overlay.classList.remove("hidden");
+};
+
+// show step
+function showStep() {
+  const tutorialBox = document.querySelector(".tutorial-box");
+
+  tutorialBox.style.opacity = "0";
+  tutorialBox.style.transform = "scale(0.97)";
+
+  setTimeout(() => {
+    title.textContent = steps[step].title;
+    text.textContent = steps[step].text;
+
+    backBtn.style.display = step === 0 ? "none" : "inline-block";
+    nextBtn.style.display = step === steps.length - 1 ? "none" : "inline-block";
+    exitBtn.classList.toggle("hidden", step !== steps.length - 1);
+
+    overlay.className = "tutorial-overlay";
+    overlay.classList.add(`tutorial-step-${step}`);
+
+    tutorialBox.style.opacity = "1";
+    tutorialBox.style.transform = "scale(1)";
+  }, 180);
+}
+
+// next
+nextBtn.onclick = () => {
+  step++;
+  showStep();
+};
+
+// back
+backBtn.onclick = () => {
+  step--;
+  showStep();
+};
+
+// exit
+exitBtn.onclick = () => {
+  overlay.classList.add("hidden");
+};
+
+// close (X)
+closeBtn.onclick = () => {
+  overlay.classList.add("hidden");
+};
+
+// Automatically gets the tutorial to pop up on load up 
+window.onload = () => {
+  step = 0;
+  showStep();
+  overlay.classList.remove("hidden");
+};
