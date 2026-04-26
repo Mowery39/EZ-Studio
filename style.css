@@ -250,10 +250,12 @@ body {
 }
 
 .advanced-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
+  display: grid;
+  grid-template-columns: 45px 70px;
+  grid-template-rows: 45px 45px;
+  gap: 20px 18px;
   align-items: center;
+  justify-items: center;
 }
 
 .record-btn {
@@ -261,6 +263,7 @@ body {
   height: 38px;
   background: red;
   border-radius: 50%;
+  cursor: pointer;
 }
 
 .play-btn {
@@ -269,6 +272,7 @@ body {
   border-top: 22px solid transparent;
   border-bottom: 22px solid transparent;
   border-left: 35px solid #222;
+  cursor: pointer;
 }
 
 .stop-btn {
@@ -276,15 +280,59 @@ body {
   height: 38px;
   border: 5px solid #222;
   border-radius: 5px;
+  cursor: pointer;
 }
+
+.reset-btn {
+  width: 38px;
+  height: 38px;
+  position: relative;
+  cursor: pointer;
+}
+
+/* smooth circular arc */
+.reset-btn::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 4px solid #222;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  transform: rotate(45deg);
+}
+
+/* arrow head */
+.reset-btn::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 14px;
+  width: 13px;
+  height: 11px;
+  border-top: 4px solid #222;
+  border-left: 4px solid #222;
+  transform: rotate(-20deg);
+}
+
 
 .music-grid {
   height: 150px;
+  width: 8000px;
+  position: relative;
+
   background:
     linear-gradient(to right, #333 1px, transparent 1px),
     linear-gradient(to bottom, #333 1px, transparent 1px);
   background-size: 36px 100%, 100% 45px;
   background-color: #d9d9d9;
+}
+
+.music-grid-window {
+  width: 100%;
+  height: 150px;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .advanced-sliders {

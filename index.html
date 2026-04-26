@@ -85,19 +85,22 @@
     <div class="record-btn"></div>
     <div class="play-btn"></div>
     <div class="stop-btn"></div>
+    <div class="reset-btn"></div>
   </div>
 
-  <div class="music-grid"></div>
+  <div class="music-grid-window">
+    <div class="music-grid"></div>
+  </div>
 
   <div class="advanced-sliders">
-    <label>Volume</label>
-    <input type="range" />
+    <label>Volume: <span id="advanced-volume-value">50</span></label>
+    <input id="advanced-volume" type="range" min="1" max="100" value="50" />
 
-    <label>Pitch</label>
-    <input type="range" />
+    <label>Pitch: <span id="advanced-pitch-value">50</span></label>
+    <input id="advanced-pitch" type="range" min="1" max="100" value="50" />
 
-    <label>Sound</label>
-    <input type="range" />
+    <label>Sound: <span id="advanced-sound-value">1</span></label>
+    <input id="advanced-sound" type="range" min="1" max="10" step="1" value="1" />
   </div>
 </div>
 <div class="bottom-bar"></div>
