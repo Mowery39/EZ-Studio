@@ -1,5 +1,6 @@
-const btn = document.getElementById("btn");
+const advancedPanel = document.querySelector(".advanced-panel");
+const page = document.querySelector(".page");
 
-btn.addEventListener("click", () => {
-  alert("JavaScript is working!");
+advancedPanel.addEventListener("click", () => {
+  page.classList.toggle("advanced-open");
 });
