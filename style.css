@@ -209,3 +209,93 @@ body {
   font-size: 1rem;
   margin-top: -57px;  /* pulls text closer to arrow */
 }
+
+/* When advanced tab is clicked, pull the whole advanced area up */
+.page.advanced-open .bottom-bar {
+  height: 300px;
+}
+
+.page.advanced-open .advanced-panel {
+  bottom: 220px;
+}
+
+/* Hide main center controls when advanced is open */
+.page.advanced-open .main-control {
+  display: none;
+}
+
+/* Advanced content area */
+.advanced-content {
+  display: none;
+}
+
+.page.advanced-open .advanced-content {
+  display: grid;
+}
+
+.advanced-content {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 220px;
+  background: #a9aba6;
+  z-index: 3;
+
+  grid-template-columns: 120px 1fr 360px;
+  align-items: center;
+  gap: 30px;
+  padding: 20px 80px;
+}
+
+.advanced-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: center;
+}
+
+.record-btn {
+  width: 38px;
+  height: 38px;
+  background: red;
+  border-radius: 50%;
+}
+
+.play-btn {
+  width: 0;
+  height: 0;
+  border-top: 22px solid transparent;
+  border-bottom: 22px solid transparent;
+  border-left: 35px solid #222;
+}
+
+.stop-btn {
+  width: 38px;
+  height: 38px;
+  border: 5px solid #222;
+  border-radius: 5px;
+}
+
+.music-grid {
+  height: 150px;
+  background:
+    linear-gradient(to right, #333 1px, transparent 1px),
+    linear-gradient(to bottom, #333 1px, transparent 1px);
+  background-size: 36px 100%, 100% 45px;
+  background-color: #d9d9d9;
+}
+
+.advanced-sliders {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.advanced-sliders label {
+  font-size: 1rem;
+}
+
+.advanced-sliders input {
+  width: 100%;
+}
