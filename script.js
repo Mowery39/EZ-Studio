@@ -1,3 +1,16 @@
+let isRecording = false;
+let isPlaying = false;
+let recordedNotes = [];
+let startTime = 0;
+let recordingOffset = 0;
+
+const recordBtn = document.querySelector(".record-btn");
+const playBtn = document.querySelector(".play-btn");
+const stopBtn = document.querySelector(".stop-btn");
+const resetBtn = document.querySelector(".reset-btn");
+const grid = document.querySelector(".music-grid");
+const gridWindow = document.querySelector(".music-grid-window");
+
 const advancedPanel = document.querySelector(".advanced-panel");
 const page = document.querySelector(".page");
 const sounds = {
@@ -20,15 +33,24 @@ advancedPanel.addEventListener("click", () => {
 // listen for spacebar
 document.addEventListener("keydown", (e) => {
   if (e.code === "Space") {
+
+  if (isRecording) {
+    recordedNotes.push({
+      time: recordingOffset + (Date.now() - startTime),
+      sound: soundLevel,
+      pitch: pitchLevel,
+      volume: volumeLevel
+    });
+
+      drawNote(recordedNotes[recordedNotes.length - 1]);
+  }
+
     e.preventDefault();
 
     const sound = sounds[soundLevel];
 
-    // apply pitch
-    sound.playbackRate = 0.5 + (pitchLevel - 1) * 0.15;
-
-    // apply volume (convert 1–10 → 0.1–1.0)
-    sound.volume = volumeLevel / 10;
+    sound.playbackRate = 0.5 + (pitchLevel - 1) * 0.015;
+    sound.volume = volumeLevel / 100;
 
     sound.currentTime = 0;
     sound.play();
@@ -43,6 +65,14 @@ let soundLevel = 1;
 const pitchValue = document.getElementById("pitch-value");
 const volumeValue = document.getElementById("volume-value");
 const soundValue = document.getElementById("sound-value");
+
+const advancedVolume = document.getElementById("advanced-volume");
+const advancedPitch = document.getElementById("advanced-pitch");
+const advancedSound = document.getElementById("advanced-sound");
+
+const advancedVolumeValue = document.getElementById("advanced-volume-value");
+const advancedPitchValue = document.getElementById("advanced-pitch-value");
+const advancedSoundValue = document.getElementById("advanced-sound-value");
 
 // PITCH
 document.getElementById("pitch-up").onclick = () => {
@@ -74,6 +104,34 @@ document.getElementById("sound-up").onclick = () => {
 
 document.getElementById("sound-down").onclick = () => {
   if (soundLevel > 1) soundLevel--;
+  soundValue.textContent = soundLevel;
+};
+
+// ===== ADVANCED SLIDERS =====
+
+// Volume slider
+advancedVolume.oninput = () => {
+  volumeLevel = Number(advancedVolume.value);
+  advancedVolumeValue.textContent = volumeLevel;
+
+  // sync main display (1–100 → 1–10)
+  volumeValue.textContent = Math.ceil(volumeLevel / 10);
+};
+
+// Pitch slider
+advancedPitch.oninput = () => {
+  pitchLevel = Number(advancedPitch.value);
+  advancedPitchValue.textContent = pitchLevel;
+
+  pitchValue.textContent = Math.ceil(pitchLevel / 10);
+};
+
+// Sound slider
+advancedSound.oninput = () => {
+  soundLevel = Number(advancedSound.value);
+  advancedSoundValue.textContent = soundLevel;
+
+  // also update main display
   soundValue.textContent = soundLevel;
 };
 
@@ -169,4 +227,71 @@ window.onload = () => {
   step = 0;
   showStep();
   overlay.classList.remove("hidden");
+};
+
+recordBtn.onclick = () => {
+  isRecording = !isRecording;
+
+  if (isRecording) {
+    recordingOffset = recordedNotes.length > 0
+      ? Math.max(...recordedNotes.map(note => note.time)) + 500
+      : 0;
+
+    startTime = Date.now();
+    recordBtn.style.background = "darkred";
+  } else {
+    recordBtn.style.background = "red";
+  }
+};
+
+function drawNote(noteData) {
+  const note = document.createElement("div");
+
+  note.style.position = "absolute";
+  note.style.width = "16px";
+  note.style.height = "16px";
+  note.style.background = "black";
+  note.style.borderRadius = "3px";
+
+  note.style.left = `${noteData.time / 20}px`;
+  note.style.bottom = `${Math.ceil(noteData.pitch / 10) * 12}px`;
+
+  grid.appendChild(note);
+
+  gridWindow.scrollTo({
+    left: note.offsetLeft - 200,
+    behavior: "smooth"
+  });
+}
+
+playBtn.onclick = () => {
+  if (recordedNotes.length === 0) return;
+
+  isPlaying = true;
+
+  recordedNotes.forEach(note => {
+    setTimeout(() => {
+      if (!isPlaying) return;
+
+      const sound = sounds[note.sound];
+
+      sound.playbackRate = 0.5 + (note.pitch - 1) * 0.015;
+      sound.volume = note.volume / 100;
+      sound.currentTime = 0;
+      sound.play();
+    }, note.time);
+  });
+};
+
+stopBtn.onclick = () => {
+  isPlaying = false;
+};
+
+resetBtn.onclick = () => {
+  isRecording = false;
+  isPlaying = false;
+  recordedNotes = [];
+  grid.innerHTML = "";
+  recordBtn.style.background = "red";
+  gridWindow.scrollLeft = 0;
 };
