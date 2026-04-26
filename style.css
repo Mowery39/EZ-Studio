@@ -299,3 +299,8 @@ body {
 .advanced-sliders input {
   width: 100%;
 }
+
+.value {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
