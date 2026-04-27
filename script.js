@@ -25,6 +25,7 @@ const sounds = {
   9: new Audio("assets/sounds/hithopSnare.mp3"),
   10: new Audio("assets/sounds/splash.mp3"),
 };
+const soundNames = ["Kick", "Snare", "Closed Hi Hat", "Open Hi Hat", "Clap", "Double Rim Shot", "Tom Low", "Hit Hop Snare", "Splash"]
 
 advancedPanel.addEventListener("click", () => {
   page.classList.toggle("advanced-open");
@@ -99,12 +100,18 @@ document.getElementById("volume-down").onclick = () => {
 // SOUND
 document.getElementById("sound-up").onclick = () => {
   if (soundLevel < 10) soundLevel++;
-  soundValue.textContent = soundLevel;
+  soundValue.textContent = soundNames[soundLevel];
+
+  //Update Advanced Slider
+  advancedSoundValue.textContent = soundNames[soundLevel];
 };
 
 document.getElementById("sound-down").onclick = () => {
   if (soundLevel > 1) soundLevel--;
-  soundValue.textContent = soundLevel;
+  soundValue.textContent = soundNames[soundLevel];
+
+   //Update Advanced Slider
+  advancedSoundValue.textContent = soundNames[soundLevel];
 };
 
 // ===== ADVANCED SLIDERS =====
@@ -129,10 +136,10 @@ advancedPitch.oninput = () => {
 // Sound slider
 advancedSound.oninput = () => {
   soundLevel = Number(advancedSound.value);
-  advancedSoundValue.textContent = soundLevel;
+  advancedSoundValue.textContent = soundNames[soundLevel];
 
   // also update main display
-  soundValue.textContent = soundLevel;
+  soundValue.textContent = soundNames[soundLevel];
 };
 
 const infoBtn = document.querySelector(".info-btn");
