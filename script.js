@@ -58,8 +58,8 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-let pitchLevel = 5;
-let volumeLevel = 5;
+let pitchLevel = 50;
+let volumeLevel = 50;
 let soundLevel = 1;
 
 // get elements
@@ -75,43 +75,53 @@ const advancedVolumeValue = document.getElementById("advanced-volume-value");
 const advancedPitchValue = document.getElementById("advanced-pitch-value");
 const advancedSoundValue = document.getElementById("advanced-sound-value");
 
+// keeps both the simple controls and advanced controls showing the same current settings
+function syncControls() {
+  pitchValue.textContent = Math.ceil(pitchLevel / 10);
+  volumeValue.textContent = Math.ceil(volumeLevel / 10);
+  soundValue.textContent = soundLevel;
+
+  advancedPitch.value = pitchLevel;
+  advancedVolume.value = volumeLevel;
+  advancedSound.value = soundLevel;
+
+  advancedPitchValue.textContent = pitchLevel;
+  advancedVolumeValue.textContent = volumeLevel;
+  advancedSoundValue.textContent = soundLevel;
+}
+
+syncControls();
+
 // PITCH
 document.getElementById("pitch-up").onclick = () => {
-  if (pitchLevel < 10) pitchLevel++;
-  pitchValue.textContent = pitchLevel;
+  pitchLevel = Math.min(100, pitchLevel + 10);
+  syncControls();
 };
 
 document.getElementById("pitch-down").onclick = () => {
-  if (pitchLevel > 1) pitchLevel--;
-  pitchValue.textContent = pitchLevel;
+  pitchLevel = Math.max(10, pitchLevel - 10);
+  syncControls();
 };
 
 // VOLUME
 document.getElementById("volume-up").onclick = () => {
-  if (volumeLevel < 10) volumeLevel++;
-  volumeValue.textContent = volumeLevel;
+  volumeLevel = Math.min(100, volumeLevel + 10);
+  syncControls();
 };
 
 document.getElementById("volume-down").onclick = () => {
-  if (volumeLevel > 1) volumeLevel--;
-  volumeValue.textContent = volumeLevel;
+  volumeLevel = Math.max(10, volumeLevel - 10);
+  syncControls();
 };
-
 // SOUND
 document.getElementById("sound-up").onclick = () => {
-  if (soundLevel < 10) soundLevel++;
-  soundValue.textContent = soundNames[soundLevel];
-
-  //Update Advanced Slider
-  advancedSoundValue.textContent = soundNames[soundLevel];
+  soundLevel = Math.min(10, soundLevel + 1);
+  syncControls();
 };
 
 document.getElementById("sound-down").onclick = () => {
-  if (soundLevel > 1) soundLevel--;
-  soundValue.textContent = soundNames[soundLevel];
-
-   //Update Advanced Slider
-  advancedSoundValue.textContent = soundNames[soundLevel];
+  soundLevel = Math.max(1, soundLevel - 1);
+  syncControls();
 };
 
 // ===== ADVANCED SLIDERS =====
@@ -119,28 +129,18 @@ document.getElementById("sound-down").onclick = () => {
 // Volume slider
 advancedVolume.oninput = () => {
   volumeLevel = Number(advancedVolume.value);
-  advancedVolumeValue.textContent = volumeLevel;
-
-  // sync main display (1–100 → 1–10)
-  volumeValue.textContent = Math.ceil(volumeLevel / 10);
+  syncControls();
 };
 
 // Pitch slider
 advancedPitch.oninput = () => {
   pitchLevel = Number(advancedPitch.value);
-  advancedPitchValue.textContent = pitchLevel;
-
-  pitchValue.textContent = Math.ceil(pitchLevel / 10);
+  syncControls();
 };
 
 // Sound slider
 advancedSound.oninput = () => {
   soundLevel = Number(advancedSound.value);
-  advancedSoundValue.textContent = soundNames[soundLevel];
-
-  // also update main display
-  soundValue.textContent = soundNames[soundLevel];
-};
 
 const infoBtn = document.querySelector(".info-btn");
 const overlay = document.getElementById("tutorial-overlay");
