@@ -25,6 +25,7 @@ const sounds = {
   9: new Audio("assets/sounds/hithopSnare.mp3"),
   10: new Audio("assets/sounds/splash.mp3"),
 };
+const soundNames = ["Kick", "Snare", "Closed Hi Hat", "Open Hi Hat", "Clap", "Double Rim Shot", "Tom Low", "Hit Hop Snare", "Splash"]
 
 advancedPanel.addEventListener("click", () => {
   page.classList.toggle("advanced-open");
@@ -112,7 +113,6 @@ document.getElementById("volume-down").onclick = () => {
   volumeLevel = Math.max(10, volumeLevel - 10);
   syncControls();
 };
-
 // SOUND
 document.getElementById("sound-up").onclick = () => {
   soundLevel = Math.min(10, soundLevel + 1);
@@ -141,8 +141,6 @@ advancedPitch.oninput = () => {
 // Sound slider
 advancedSound.oninput = () => {
   soundLevel = Number(advancedSound.value);
-  syncControls();
-};
 
 const infoBtn = document.querySelector(".info-btn");
 const overlay = document.getElementById("tutorial-overlay");
