@@ -25,7 +25,7 @@ const sounds = {
   9: new Audio("assets/sounds/hithopSnare.mp3"),
   10: new Audio("assets/sounds/splash.mp3"),
 };
-const soundNames = ["Kick", "Snare", "Closed Hi Hat", "Open Hi Hat", "Clap", "Double Rim Shot", "Tom Low", "Hit Hop Snare", "Splash"]
+const soundNames = ["Kick", "Snare", "Closed Hi Hat", "Open Hi Hat", "Clap", "Double Rim Shot", "Tom Low", "Acoustic Snare", "Hit Hop Snare", "Splash"]
 
 advancedPanel.addEventListener("click", () => {
   page.classList.toggle("advanced-open");
@@ -79,7 +79,7 @@ const advancedSoundValue = document.getElementById("advanced-sound-value");
 function syncControls() {
   pitchValue.textContent = Math.ceil(pitchLevel / 10);
   volumeValue.textContent = Math.ceil(volumeLevel / 10);
-  soundValue.textContent = soundLevel;
+  soundValue.textContent = soundNames[soundLevel - 1];
 
   advancedPitch.value = pitchLevel;
   advancedVolume.value = volumeLevel;
@@ -87,7 +87,7 @@ function syncControls() {
 
   advancedPitchValue.textContent = pitchLevel;
   advancedVolumeValue.textContent = volumeLevel;
-  advancedSoundValue.textContent = soundLevel;
+  advancedSoundValue.textContent = soundNames[soundLevel - 1];
 }
 
 syncControls();
@@ -139,8 +139,11 @@ advancedPitch.oninput = () => {
 };
 
 // Sound slider
+// Sound slider
 advancedSound.oninput = () => {
   soundLevel = Number(advancedSound.value);
+  syncControls();
+};
 
 const infoBtn = document.querySelector(".info-btn");
 const overlay = document.getElementById("tutorial-overlay");
