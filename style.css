@@ -72,7 +72,7 @@ body {
 .controls {
   grid-column: 3;
   display: grid;
-  grid-template-columns: repeat(3, 80px);
+  grid-template-columns: 80px 80px 120px;
   justify-content: center;
   column-gap: 22px;
 }
@@ -507,4 +507,18 @@ body {
 
 .tutorial-buttons button:active {
   transform: translateY(0px) scale(0.97);
+}
+
+#sound-control {
+  width: 120px;
+}
+
+#sound-value {
+  width: 120px;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.1;
+
+  white-space: normal;       /* allow wrapping */
+  overflow-wrap: break-word; /* break long words */
 }
