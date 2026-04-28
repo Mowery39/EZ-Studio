@@ -1,5 +1,6 @@
 let isRecording = false;
 let isPlaying = false;
+let imageToggle = false;
 let recordedNotes = [];
 let startTime = 0;
 let recordingOffset = 0;
@@ -46,7 +47,14 @@ document.addEventListener("keydown", (e) => {
       drawNote(recordedNotes[recordedNotes.length - 1]);
   }
 
+    imageToggle = !imageToggle
+    if(imageToggle)
+      document.getElementById("drum_image").src = "drum_frame2.png"
+    else
+      document.getElementById("drum_image").src = "drum_frame1.png"
+    
     e.preventDefault();
+
 
     const sound = sounds[soundLevel];
 
