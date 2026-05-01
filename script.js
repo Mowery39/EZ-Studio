@@ -180,7 +180,7 @@ const steps = [
   },
   {
     title: "Advanced Settings",
-    text: "Use the Advanced tab for more features."
+    text: "Use the Advanced tab to record and playback the sounds you create."
   },
   {
     title: "You're Ready to Go!",
@@ -249,6 +249,7 @@ window.onload = () => {
 
 recordBtn.onclick = () => {
   isRecording = !isRecording;
+  let status = document.getElementById("recording-status");
 
   if (isRecording) {
     recordingOffset = recordedNotes.length > 0
@@ -257,8 +258,13 @@ recordBtn.onclick = () => {
 
     startTime = Date.now();
     recordBtn.style.background = "darkred";
+
+    //Show recording status
+    status.style.display = "flex";
+    console.log("status display set to flex");
   } else {
     recordBtn.style.background = "red";
+    status.style.display = "none"
   }
 };
 

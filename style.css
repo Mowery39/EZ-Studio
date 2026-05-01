@@ -266,6 +266,15 @@ body {
   cursor: pointer;
 }
 
+
+.record-status-btn {
+  width: 19px;
+  height: 19px;
+  background: red;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
 .play-btn {
   width: 0;
   height: 0;
